@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    <body{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    #h, #k2{
+        display: none;
+    }
+    @media {
+        #toggle:checked ~ #h{
+            display: block;
+        }
+        #toggle:checked ~ #k1{
+            display: none;
+        }
+        #toggle:checked ~ #k2{
+            display: block;
+        }
+    }
+</style>
+<body>
+    <input type="checkbox" id="toggle" style="display:none;">
+    <label for="toggle" id="k1">kanipinchuu..</label>
+    <label for="toggle" id="k2">Kanapadakuu..</label>
+    <h1 id="h">Hii Raa Kanna</h1>
+    <h1 id="h">How Are You</h1>
+    <h1 id="h">Aree Thammudu Ninne ra </h1>
+</body>
+</html>

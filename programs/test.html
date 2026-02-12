@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="" id="i1" alt="">
+    <ul id="d1"></ul>
+    <li id="l1"></li>
+    <p id="p1"></p>
+    <table border="2"></table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Maths</th>
+            <th>physics</th>
+            <th>chemistry</th>
+        </tr>
+    </thead>
+    <tbody id="d1"></tbody>
+
+    <script>
+
+            const students = [
+                {
+                    name:"kalyan",
+                    marks:[
+                        {subject:"maths",marks:90}
+                        {}
+                    ]
+                }
+            ]
+            students.forEach(function(student){
+                var ntr = document.createElement("tr")
+                var ntd = document.createElement("td")
+                ntd.innerText=student;
+                ntr.appendChild(ntd)
+                
+                var mtd = document.createElement("td")
+                mtd.innerText
+                document.getElementById("d2").appendChild(ntr)
+            })
+
+            // var students = ["kalyan","nagendra","varma"]
+            // for(var i=0;i<=students.length-1;i++){
+            //     var nli=document.createElement("li")
+            //     nli.innerText=students[i]
+            //     document.getElementById("d1").appendChild(nli)
+            // }
+
+
+
+        // var thumbnails = [""]
+        // var x = document.getElementById("i1")
+        // var i = 0
+        // var t1=setInterval(function(){
+        //     x.src = thumbnails[0]
+        //     x++
+        //     if(i==thumbnails.length){
+        //         i=0
+        //     }
+        // },1000)
+        
+
+        // var thumbnails = [""]
+        // var x = document.getElementById("i1")
+        // x.src = thumbnails[0]
+
+
+        // var act = [{name:"kalyan", branch:"dcme"},{name:"nagendra",branch:"dcme"}]
+        // for(var i=0;i<=act.length-1;i++){
+        //     var nli = document.createElement("li")
+        //     nli.innerText = act[i].name
+
+        //     var nli1 = document.createElement("li")
+        //     nli1.innerText = act[i].branch
+
+        //     document.getElementById("l1").appendChild(nli)
+        //     document.getElementById("l1").appendChild(nli1)
+
+        // }   
+
+
+        // var act = [{name:"kalyan", branch:"dcme"},{name:"nagendra",branch:"dcme"}]
+        // for(var i=0;i<=act.length-1;i++){
+        //     var nli = document.createElement("li")
+        //     nli.innerText = act[i].name
+        //     document.getElementById("l1").appendChild(nli)
+        // }
+
+        
+        // var act = ["a","b","c","d","e","f","g","h"]
+        // for(var i=0;i<=act.length-1;i++){
+        //     var nn = document.createElement("li")
+        //     nn.innerText = act[i]
+        //     document.getElementById("l1").appendChild(nn)
+        // }
+
+
+        // var k = document.createElement("h1")
+        // k.innerText = "welcome"
+        // document.getElementById("d1").appendChild(k)
+
+
+
+        // var k = document.createElement("h1")
+        // k.innerText = "welcome"
+        // document.body.appendChild(k)
+
+
+
+
+        // function div(a,b){
+        //     if(isNaN(a) || isNaN(b) || b==0){
+        //         return Promise.reject("invalid input")
+        //     }
+        //     else{
+        //         return Promise.resolve(a/b)
+        //     }
+        // }
+        // var x = +prompt()
+        // var y = +prompt()
+        // div(x,y)
+        //     .then(function(res){console.log(res)})
+        //     .catch(function(err){alert(err)})
+
+
+        // function div(a,b){
+        //     console.log(a/b)
+        // }
+        // div(4,5)
+        // div("three",2,function(err,res){
+        //     if(err){console.log(err)}
+        //     else{console.log(res)}
+        // })
+        // function add(a,b,cb){
+        //     ab(a+b)
+        // }
+        // add(10,20,function(res){
+        //     console.log(res)
+        // })
+
+
+        // function div(a,b){
+        //     console.log(a/b)
+        // }
+        // div(4,5)
+        // div("three",2)
+
+
+        // var ar=[]
+        // var br = [13,25,28]
+        // var cr = []
+        // for(let i=1;i<=3;i++){
+        //     ar.push(function(){console.log(i)})
+        // }
+        // console.log(ar)
+
+        // br.forEach(function(a,k){
+        //     cr.push(function(){console.log(k,a)})
+        // })
+        // console.log(cr)
+        // cr[0]()
+        // cr[1]()
+        // cr[2]()
+        // cr[3]()
+
+        // for(let j=0;j<=br.length-1;j++){
+        //     cr.push(function(){console.log(j)})
+        // }
+        // console.log(cr)
+
+
+        // ar[0]()
+        // ar[1]()
+        // ar[2]()
+        // console.log(i)
+        
+
+        // var ar = []
+        // for (var i =1;i<=3;i++){
+        //     ar.push(function(){
+        //         console.log(i)
+                
+        //     })
+        // }
+        // // console.log(i)
+        // // console.log(ar)
+        // console.log(ar[0]())
+        // // console.log(ar[1]())
+        // // console.log(ar[2]())
+
+        // var ar = []
+        // for (var i =1;i<=3;i++){
+        //     ar.push(function(){
+        //         console.log(i)
+                
+        //     })
+        // }
+        // // console.log(i)
+        // // console.log(ar)
+        // console.log(ar[0]())
+        // // console.log(ar[1]())
+        // // console.log(ar[2]())
+        
+        // var a = 10
+        // function abc(){
+            
+        //     a=a+1
+        //     var a = 20
+        //     a = a+1
+        // }
+        // abc()
+        // console.log(a)
+
+        // var b = 400
+        // function abc(){
+        //     console.log(b)
+        //     var b = 200
+        //     console.log(b)
+        // }
+        // abc()
+        // console.log(b)
+        
+        // var a = 100
+        // {
+        //     // console.log(a)
+        //     abc()
+        //     let a = 200
+        // console.log(a)
+        // function abc(){
+        //     console.log("kk")
+        // }
+        // }
+
+        // console.log(a)
+        // console.log(b)
+        // var a = 130
+        // let b = 230
+        // console.log(a)
+
+        // abc();
+        //    function abc(){
+        //     console.log("kalyan")}
+        
+
+            // var i = 100
+            // {
+            //     var i= 200
+            //     console.log(i)
+            //     let b = 300
+            // }
+            // console.log(i)
+
+
+            // console.log(a)
+            // console.log(b)
+            // console.log(c)
+            // var a = 100;
+            // let b = 200;
+            // const c = 300;
+            // console.log(a)
+            // console.log(b)
+            // console.log(c)
+
+            // var products = [
+            //     {title:"wireless headphone",price:25,discount:10,category:"electronics"}
+            // ]
+            // var k = products.map(function(pro){
+            //     pro.finalprice=products.price-(100-pro.discount)
+            //     return pro
+            // })
+            // console.log(products)
+
+        // var a=[51,52,6,48,54,65,48,8,5,1,7]
+        // var k = a.reduce(function(a,b){
+        //     return a*b
+        // })
+        // console.log(k)
+
+        // var a=[51,52,6,48,-654,65,48,8,5,1]
+        // var k = a.reduce(function(a,b){
+        //     return a>b?a:b
+        // })
+        // console.log(k)
+
+        // var a=[51,52,6,48,654,65,48,8,5,1]
+        // var k = a.reduce(function(a,b){
+        //     console.log(a,b)
+        //     return a+b
+        // },0)
+        // console.log(k)
+        
+        // var a=[51,51,6,48,654,65,48,8,5,1]
+        // var i = 0
+        // var k = a.reduce(function(a,b){
+        //     // console.log(a,b)
+        //     return i++
+        // },i)
+        // console.log(k)
+
+        // var a=[10,55,30,40,3]
+        // var j = a.filter(function (a,b){
+        //     return a>30
+        // })
+        // console.log(j)
+
+        // var a=[10,20,30,40]
+        // var p = a.forEach(function (a,b){
+        //     console.log(a,b)
+            
+        // })
+        
+
+        // var a=[10,20,30,40]
+        // var p = a.map(function (a,b){
+        //     console.log(a,b)
+        //     return (a,b);
+        // })
+        // console.log(p)
+
+
+        // function add(a,b){
+        //     console.log(a+b)
+        // }
+        // var k = add(10,24)
+        // console.log(k)
+    </script>
+</body>
+</html>

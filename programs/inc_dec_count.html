@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="d1" align="center">Count:<span></span></h1>
+    <button align="center" onclick="dec('count')" >Decrement Count</button>
+    <button align="center" onclick="inc('count')" >Increment Count</button>
+    <script>
+        var count=0
+        function update(){
+            document.querySelector("#d1  span").innerHTML = count
+            }
+        update()
+        function inc(){
+            count+=1
+            update()
+        }
+        function dec(){
+            count-=1
+            update()
+        }
+    </script>
+</body>
+</html>

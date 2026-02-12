@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <border border="2"><h1>Kalyan</h1></border>
+    <border>
+        <h2>To Do List</h2>
+        <input id="inp1" type="text" onkeyup="checkenter(event)">
+        <button onclick="addstr('Add',event)" >Add</button>
+        <button onclick=""
+    </border>
+        <ul id="li1"><span></span></ul>
+
+    
+</body>
+    <script>
+        var arr=[]
+
+        function addstr(){
+            var val=document.getElementById("inp1").value;
+            
+            if(val!=""){
+                arr.push(val)
+                getUI()
+            }
+            document.getElementById("inp1").value=""
+        }
+        function getUI(){
+            document.getElementById("li1").innerHTML=""
+            arr.forEach(function(t){
+                var ntd=document.createElement("li")
+                ntd.innerText=t
+                document.getElementById("li1").appendChild(ntd)
+            })
+        }
+        function checkenter(ev){
+            if(ev.key=="Enter"){
+                addstr()
+            }
+        }
+        console.log(arr)
+    </script>
+</html>

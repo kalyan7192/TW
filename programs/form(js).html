@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="radio" name="gen" value="female">:female
+    <input type="radio" name="gen" value="male">:male
+    <input type="radio" name="gen" value="others">:others
+    <button onclick="show()">gender</button>
+    <script>
+        function show(){
+            var x=document.querySelectorAll("input[name='gen']")
+            console.log(x);
+            x.forEach(function(el){
+                if(el.checked){
+                    console.log(el.value)
+                }
+            })
+        }
+    </script>
+</body>
+</html>

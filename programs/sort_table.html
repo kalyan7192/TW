@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        th.click{
+            cursor: pointer;
+            padding: 20px;
+            width: 100px;
+        }
+        td{
+            text-align: center;
+            padding: 10px;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <table border="2" id="t1" align="center">
+        <thead>
+            <tr>
+                <th class="click" onclick="sortEmployees('firstname',event)">Firstname<span></span></th>
+                <th class="click" onclick="sortEmployees('lastname',event)">Lastname<span></span></th>
+                <th class="click" onclick="sortEmployees('age',event)">Age<span></span></th>
+                <th class="click" onclick="sortEmployees('gender',event)">Gender<span></span></th>
+                <th class="click" onclick="sortEmployees('city',event)">City<span></span></th>
+                <th class="click" onclick="sortEmployees('salary',event)">Salary<span></span></th>
+            </tr>
+        </thead>
+        <tbody id="d1">
+
+        </tbody>
+    </table>
+
+    <select name="" id="" onchange="setPerPage(event)" align="center">
+        <option value="5" selected>5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+        <option value="25">25</option>
+        <option value="30">30</option>
+    </select>
+    <button onclick="prevPage()">Previous</button>
+    <button onclick="nextPage()">Next</button>
+    <!-- <button id="b1" onclick="rows('rows',event)">Rows<span></span></button> -->
+
+    <script>
+        const employees = [
+            { firstname: "Amit", lastname: "Sharma", age: 30, gender: "Male", city: "Delhi", salary: 60000 },
+            { firstname: "Priya", lastname: "Verma", age: 25, gender: "Female", city: "Mumbai", salary: 75000 },
+            { firstname: "Rahul", lastname: "Mehta", age: 35, gender: "Male", city: "Ahmedabad", salary: 80000 },
+            { firstname: "Neha", lastname: "Gupta", age: 28, gender: "Female", city: "Jaipur", salary: 70000 },
+            { firstname: "Vikas", lastname: "Singh", age: 40, gender: "Male", city: "Lucknow", salary: 90000 },
+            { firstname: "Ankit", lastname: "Yadav", age: 32, gender: "Male", city: "Noida", salary: 65000 },
+            { firstname: "Pooja", lastname: "Agarwal", age: 29, gender: "Female", city: "Kolkata", salary: 82000 },
+            { firstname: "Rohit", lastname: "Kumar", age: 31, gender: "Male", city: "Patna", salary: 78000 },
+            { firstname: "Sneha", lastname: "Iyer", age: 27, gender: "Female", city: "Chennai", salary: 72000 },
+            { firstname: "Suresh", lastname: "Reddy", age: 38, gender: "Male", city: "Hyderabad", salary: 88000 },
+
+            { firstname: "Kavita", lastname: "Nair", age: 34, gender: "Female", city: "Kochi", salary: 76000 },
+            { firstname: "Arjun", lastname: "Malhotra", age: 29, gender: "Male", city: "Chandigarh", salary: 69000 },
+            { firstname: "Meena", lastname: "Joshi", age: 36, gender: "Female", city: "Pune", salary: 85000 },
+            { firstname: "Sanjay", lastname: "Bansal", age: 42, gender: "Male", city: "Gurgaon", salary: 95000 },
+            { firstname: "Ritu", lastname: "Khanna", age: 26, gender: "Female", city: "Amritsar", salary: 62000 },
+            { firstname: "Manish", lastname: "Chopra", age: 33, gender: "Male", city: "Faridabad", salary: 71000 },
+            { firstname: "Anjali", lastname: "Kapoor", age: 28, gender: "Female", city: "Delhi", salary: 68000 },
+            { firstname: "Deepak", lastname: "Pandey", age: 37, gender: "Male", city: "Varanasi", salary: 83000 },
+            { firstname: "Sunita", lastname: "Mishra", age: 41, gender: "Female", city: "Bhopal", salary: 87000 },
+            { firstname: "Rakesh", lastname: "Thakur", age: 35, gender: "Male", city: "Shimla", salary: 79000 },
+
+            { firstname: "Nidhi", lastname: "Saxena", age: 24, gender: "Female", city: "Bareilly", salary: 58000 },
+            { firstname: "Ashok", lastname: "Jain", age: 45, gender: "Male", city: "Indore", salary: 98000 },
+            { firstname: "Swati", lastname: "Goyal", age: 31, gender: "Female", city: "Agra", salary: 74000 },
+            { firstname: "Kunal", lastname: "Arora", age: 27, gender: "Male", city: "Panipat", salary: 66000 },
+            { firstname: "Bhavna", lastname: "Shukla", age: 34, gender: "Female", city: "Kanpur", salary: 81000 },
+            { firstname: "Mohit", lastname: "Bhardwaj", age: 39, gender: "Male", city: "Rohtak", salary: 89000 },
+            { firstname: "Rekha", lastname: "Kulkarni", age: 43, gender: "Female", city: "Nagpur", salary: 92000 },
+            { firstname: "Tarun", lastname: "Sethi", age: 28, gender: "Male", city: "Jalandhar", salary: 67000 },
+            { firstname: "Shalini", lastname: "Tiwari", age: 36, gender: "Female", city: "Gwalior", salary: 84000 },
+            { firstname: "Naveen", lastname: "Shetty", age: 41, gender: "Male", city: "Mangalore", salary: 91000 },
+
+            { firstname: "Komal", lastname: "Bhatia", age: 26, gender: "Female", city: "Udaipur", salary: 61000 },
+            { firstname: "Pradeep", lastname: "Soni", age: 44, gender: "Male", city: "Jodhpur", salary: 96000 },
+            { firstname: "Ayesha", lastname: "Khan", age: 29, gender: "Female", city: "Bangalore", salary: 77000 },
+            { firstname: "Imran", lastname: "Ali", age: 33, gender: "Male", city: "Hyderabad", salary: 82000 },
+            { firstname: "Farah", lastname: "Ansari", age: 35, gender: "Female", city: "Mumbai", salary: 86000 },
+            { firstname: "Salman", lastname: "Qureshi", age: 38, gender: "Male", city: "Bhopal", salary: 90000 },
+            { firstname: "Pankaj", lastname: "Tripathi", age: 46, gender: "Male", city: "Rewa", salary: 99000 },
+            { firstname: "Jyoti", lastname: "Choudhary", age: 32, gender: "Female", city: "Hisar", salary: 73000 },
+            { firstname: "Abhishek", lastname: "Rana", age: 34, gender: "Male", city: "Dehradun", salary: 81000 },
+            { firstname: "Kiran", lastname: "Patil", age: 37, gender: "Female", city: "Nashik", salary: 88000 },
+            { firstname: "Aravind", lastname: "Krishnan", age: 45, gender: "Male", city: "Chennai", salary: 85000 },
+            { firstname: "Meenakshi", lastname: "Sundaram", age: 50, gender: "Female", city: "Madurai", salary: 90000 },
+            { firstname: "Karthik", lastname: "Subramanian", age: 42, gender: "Male", city: "Coimbatore", salary: 82000 },
+            { firstname: "Lakshmi", lastname: "Raghavan", age: 48, gender: "Female", city: "Trichy", salary: 87000 },
+            { firstname: "Srinivas", lastname: "Rao", age: 55, gender: "Male", city: "Vijayawada", salary: 92000 },
+            { firstname: "Padma", lastname: "Narayanan", age: 44, gender: "Female", city: "Salem", salary: 86000 },
+            { firstname: "Venkatesh", lastname: "Iyer", age: 58, gender: "Male", city: "Tirunelveli", salary: 95000 },
+            { firstname: "Bhavya", lastname: "Menon", age: 18, gender: "Female", city: "Thrissur", salary: 35000 },
+            { firstname: "Raghav", lastname: "Shankar", age: 16, gender: "Male", city: "Bangalore", salary: 30000 },
+            { firstname: "Ananya", lastname: "Pillai", age: 19, gender: "Female", city: "Kollam", salary: 38000 },
+
+            { firstname: "Harish", lastname: "Gowda", age: 47, gender: "Male", city: "Mysore", salary: 88000 },
+            { firstname: "Sudha", lastname: "Hegde", age: 52, gender: "Female", city: "Udupi", salary: 91000 },
+            { firstname: "Naveen", lastname: "Shekar", age: 41, gender: "Male", city: "Tumkur", salary: 83000 },
+            { firstname: "Preethi", lastname: "Kulkarni", age: 17, gender: "Female", city: "Hubli", salary: 32000 },
+            { firstname: "Manoj", lastname: "Acharya", age: 59, gender: "Male", city: "Mangalore", salary: 97000 },
+            { firstname: "Divya", lastname: "Prasad", age: 14, gender: "Female", city: "Hassan", salary: 28000 },
+            { firstname: "Suresh", lastname: "Naidu", age: 54, gender: "Male", city: "Nellore", salary: 94000 },
+            { firstname: "Keerthi", lastname: "Chandra", age: 15, gender: "Female", city: "Rajahmundry", salary: 29000 },
+            { firstname: "Ramesh", lastname: "Babu", age: 49, gender: "Male", city: "Kakinada", salary: 89000 },
+            { firstname: "Sandhya", lastname: "Varma", age: 13, gender: "Female", city: "Eluru", salary: 26000 },
+
+            { firstname: "Prakash", lastname: "Shetty", age: 56, gender: "Male", city: "Kundapura", salary: 96000 },
+            { firstname: "Aishwarya", lastname: "Namboothiri", age: 20, gender: "Female", city: "Palakkad", salary: 40000 },
+            { firstname: "Madhavan", lastname: "Nair", age: 60, gender: "Male", city: "Alappuzha", salary: 98000 },
+            { firstname: "Snehal", lastname: "Deshpande", age: 18, gender: "Female", city: "Belgaum", salary: 34000 },
+            { firstname: "Vinod", lastname: "Kumaraswamy", age: 43, gender: "Male", city: "Mandya", salary: 84000 },
+            { firstname: "Kavitha", lastname: "Balakrishnan", age: 46, gender: "Female", city: "Thanjavur", salary: 88000 },
+            { firstname: "Surya", lastname: "Teja", age: 12, gender: "Male", city: "Ongole", salary: 25000 },
+            { firstname: "Nithya", lastname: "Srinivasan", age: 19, gender: "Female", city: "Erode", salary: 37000 },
+            { firstname: "Chandru", lastname: "Murugan", age: 51, gender: "Male", city: "Karur", salary: 91000 },
+            { firstname: "Revathi", lastname: "Arunachalam", age: 42, gender: "Female", city: "Dindigul", salary: 86000 },
+
+            { firstname: "Gopal", lastname: "Ramakrishnan", age: 57, gender: "Male", city: "Sivakasi", salary: 95000 },
+            { firstname: "Janani", lastname: "Vasudevan", age: 16, gender: "Female", city: "Pollachi", salary: 31000 },
+            { firstname: "Balaji", lastname: "Venkat", age: 44, gender: "Male", city: "Sriperumbudur", salary: 83000 },
+            { firstname: "Deepika", lastname: "Suresh", age: 11, gender: "Female", city: "Cuddalore", salary: 24000 },
+            { firstname: "Krishna", lastname: "Moorthy", age: 53, gender: "Male", city: "Chidambaram", salary: 92000 },
+            { firstname: "Yamini", lastname: "Ravichandran", age: 17, gender: "Female", city: "Kumbakonam", salary: 33000 },
+            { firstname: "Ravindra", lastname: "Hebbar", age: 48, gender: "Male", city: "Sirsi", salary: 87000 },
+            { firstname: "Shreya", lastname: "Ananth", age: 14, gender: "Female", city: "Tiruppur", salary: 27000 },
+            { firstname: "Mahesh", lastname: "Rajan", age: 52, gender: "Male", city: "Nagercoil", salary: 91000 },
+            { firstname: "Sowmya", lastname: "Kannan", age: 20, gender: "Female", city: "Pudukkottai", salary: 39000 }
+        ];
+
+        var count=1
+        var i=0
+        var step=5
+        var row=0
+        function sortdata(){
+            document.getElementById("d1").innerHTML=""
+            employees.slice(i,i+step).forEach(function(emp){
+                var ntr=document.createElement("tr")
+
+                Object.values(emp).forEach(function(e){
+                    var mtd=document.createElement("td")
+                    mtd.innerText=e
+                    ntr.appendChild(mtd)
+                })
+                document.getElementById("d1").appendChild(ntr)
+                row=row+1
+            })
+            
+        }
+        sortdata()
+
+        function sortEmployees(k,ev) {
+            document.querySelectorAll("#t1 span").forEach(function (el) {
+                el.innerHTML = ""})
+            if(count%2==0){
+                employees.sort(function (e1, e2) {
+                if (e1[k] < e2[k]) { return -1 }
+                else { return 1 }
+
+                
+                // ev.target.childNodes[1].innerHTML = "&#8595"
+            })
+            ev.target.childNodes[1].innerHTML = "&#8595"
+            }
+                
+            else{
+                employees.sort(function (e1, e2) {
+                if (e1[k] > e2[k]) { return -1 }
+                else { return 1 }
+
+                // ev.target.childNodes[1].innerHTML = "&#8593"
+            })
+            ev.target.childNodes[1].innerHTML = "&#8593"
+            }
+            
+            count++
+            sortdata()
+        }
+
+            function nextPage() {
+            i = i + step;
+            console.log(i);
+            sortdata()
+        }
+
+        function setPerPage(ev) {
+            console.log(ev.target.value);
+            step = +ev.target.value;
+            sortdata()
+        }
+
+        function prevPage() {
+            i = i - step;
+            console.log(i);
+            sortdata()
+        }
+        function rows(){
+            document.querySelectorAll('#b1 span').forEach(function(ee){
+                
+                ee.target.childNodes[0].innerHTML=row
+            })
+        }
+        console.log(row)
+        
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+
+<body>
+    <h1 id="d2"></h1>
+    <table border="2">
+        <tbody id="d1"></tbody>
+    </table>
+    <button onclick="nextset()">Next</button>
+    <script>
+        var s = 0;
+        function genTable(products) {
+            document.getElementById("d1").innerText = ""
+            products.forEach(function (product) {
+                var ntr = document.createElement("tr")
+                var titletd = document.createElement("td")
+                titletd.innerText = product.title
+                var categorytd = document.createElement("td")
+                categorytd.innerText = product.category
+                ntr.appendChild(titletd)
+                ntr.appendChild(categorytd)
+                document.getElementById("d1").appendChild(ntr)
+            })
+        
+        
+
+        }
+        function getProducts() {
+
+            // xml http
+
+            // var http = new XMLHttpRequest()
+            // http.open("GET", "https://dummyjson.com/product?limit=10&skip=" + s, true)
+            // http.send()
+            // // console.log(http.response);
+            // http.onreadystatechange = function () {
+            //     if (http.readyState == 4) {
+            //         var products = JSON.parse(http.response).products;
+            //         genTable(products)
+            //     }
+            // }
+            
+            var lin="https://dummyjson.com/product?limit=10&skip="
+
+            // fetch
+
+            // fetch(lin + s)
+            // .then(Response=>Response.json())
+            // .then(data=>genTable(data.products))
+            
+            
+            
+
+
+            // axios
+
+            // axios.get(lin + s)
+            // .then(response=>{
+            //     genTable(response.data.products)
+            // })
+                
+            }
+        
+        
+
+
+        function nextset() {
+            s = s + 10;
+            getProducts();
+        }
+
+        getProducts()
+    </script>
+</body>
+
+</html>

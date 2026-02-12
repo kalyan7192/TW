@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WATCH</title>
+</head>
+    <body align="center" style="border:5px solid black" >
+        <p>___________________________________________</p>
+        <h1>Stop Watch</h1>
+        <p>Min : Sec : M.Sec</p>
+        <h2 id="h22">00:00:00</h2>
+        <button onclick="toggle()" id="bt1">Play</button>  
+        <button onclick="reset()" id="res1">Reset</button>      
+
+
+    <p>......................................................................................</p>
+    <h1>Timer</h1>
+    <p>Min : Sec</p>
+    <h2 id="h33">--:--</h2>
+    <button onclick="toggle2(event)" id="bt2">Play</button>
+    <button onclick="reset2()" id="res2">Reset</button>
+    <p>___________________________________________</p>
+
+</body>
+
+<script>
+    // StopWatch
+        var a
+        var sec=0
+        var min=0
+        var msec=0
+        var flag='pause'
+    function timerstart(){
+        
+        a = setInterval(function(){
+            msec=msec+1
+            if(msec==99){
+                sec=sec+1
+                msec=0
+            }
+            if(sec==59&&msec==99){
+                min=min+1
+                sec=0
+                msec=0
+            }
+            document.getElementById("h22").textContent=min+":"+sec+":"+msec
+        },10)
+        flag='Play'
+        document.getElementById("bt1").innerText='Pause'
+    }
+    function timerstop(){
+        clearInterval(a)
+        flag='pause'
+        document.getElementById("bt1").innerText='Play'
+    }
+    function toggle(){
+        if(flag=='pause'){
+            timerstart()
+        }
+        else{
+            timerstop()
+        }
+    }
+    function reset(){
+        timerstop()
+        sec=0
+        min=0
+        msec=0
+        document.getElementById("h22").textContent=min+"0"+":"+sec+"0"+":"+msec+"0"
+    }
+</script>
+
+
+
+<script>
+    // Timer
+        var a1=null
+        var sec1=0
+        var min1=0
+        var flag1='pause'
+
+
+    function StopWatchstart(){
+        min1=+prompt("Enter Minutes:")
+        sec1=+prompt("Enter Seconds:")
+        if(min!=0 || sec1!=0){
+            alert("Start Timer")
+        
+            a1 = setInterval(function(){
+                if(sec1==0){
+            sec1=60
+            min1=min1-1
+        }
+            sec1=sec1-1
+            if(sec1==60){
+                min1=min1-1
+                sec1=0
+            }
+            if(sec1==0&&min1==0){
+                stopwatchstop()
+                alert("Time Up...!!!")
+            }
+            document.getElementById("h33").textContent=min1+":"+sec1
+        },1000)
+        flag1='Play'
+        document.getElementById("bt2").innerText='Pause'
+    }
+    }
+        
+    function stopwatchstop(){
+        clearInterval(a1)
+        flag1='pause'
+        document.getElementById("bt2").innerText='Play'
+    }
+    function toggle2(){
+        if(flag1=='pause'){
+            StopWatchstart()
+        }
+        else{
+            stopwatchstop()
+        }
+    }
+    function reset2(){
+        stopwatchstop()
+        min1=0
+        sec1=0
+        
+        document.getElementById("h33").textContent=min1+":"+sec1
+    }
+</script>
+</html>

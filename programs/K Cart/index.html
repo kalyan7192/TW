@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K Cart</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #ecom {
+            display: flex;
+        }
+        #products {
+            border: 2px solid;
+            width: 80%;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+        #products div {
+            width: 150px;
+            text-align: center;
+            box-shadow: 1px 1px 3px 1px;
+            border-radius: 10px;
+            margin: 5px;
+            padding: 5px;
+        }
+        #products img {
+            width: 100%;
+            
+            /* height: 40%; */
+        }
+        #cart {
+            border: 2px solid;
+            width: 20%;
+            padding: 10px;
+        }
+        .cart-item {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            box-shadow: 1px 1px 3px 1px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+        }
+        .cart-details {
+            flex: 1;
+        }
+        .cart-details h4 {
+            margin: 0 0 5px;
+        }
+        .cart-details p {
+            margin: 0 0 5px;
+            font-weight: bold;
+        }
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .qty-controls button {
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<h1 align="center">K Cart</h1>
+<div id="ecom">
+    <div id="products">
+        <h2 style="width:100%; text-align:center;">Products</h2>
+    </div>
+    <div id="cart">
+        <h2 style="text-align:center;">Cart</h2>
+    </div>
+</div>
+<script>
+    let cartItems = [];
+    function genTable(products) {
+        products.forEach(function(product) {
+            const productCard = document.createElement("div");
+            const img = document.createElement("img");
+            img.src = product.thumbnail;
+            const title = document.createElement("h4");
+            title.innerText = product.title;
+            const price = document.createElement("h5");
+            price.innerText = `$${product.price}`;
+            const btn = document.createElement("button");
+            btn.innerText = "Add To Cart";
+            btn.onclick = () => addToCart(product);
+            productCard.append(img, title, price, btn);
+            document.getElementById("products").append(productCard);
+        });
+    }
+    function addToCart(item) {
+        let found = cartItems.find(ci => ci.id === item.id);
+        if (found) {
+            found.qty++;   
+        } else {
+            cartItems.push({ ...item, qty: 1 });
+        }
+        genCart();
+    }
+    function genCart() {
+    const cart = document.getElementById("cart");
+    cart.innerHTML = `<h2 style="text-align:center;">Cart</h2>`;
+    let total = 0;
+    cartItems.forEach(function(item){
+        total += item.price * item.qty;
+        const cartItem = document.createElement("div");
+        cartItem.className = "cart-item";
+        const img = document.createElement("img");
+        img.src = item.thumbnail;
+        const details = document.createElement("div");
+        details.className = "cart-details";
+        const title = document.createElement("h4");
+        title.innerText = item.title;
+        const price = document.createElement("p");
+        price.innerText = item.price * item.qty;
+        const qtyDiv = document.createElement("div");
+        qtyDiv.className = "qty-controls";
+        const minus = document.createElement("button");
+        minus.innerText = "-";
+        const qty = document.createElement("span");
+        qty.innerText = item.qty;
+        qty.style.minWidth = "20px";
+        qty.style.textAlign = "center";
+        qty.style.fontWeight = "bold";
+        const plus = document.createElement("button");
+        plus.innerText = "+";
+        minus.onclick = function(){
+            item.qty--;
+            if (item.qty <= 0) {
+                cartItems = cartItems.filter(ci => ci.id !== item.id);
+            }
+            genCart();
+        };
+        plus.onclick = function(){
+            item.qty++;
+            genCart();
+        };
+        qtyDiv.append(minus, qty, plus);
+        details.append(title, price, qtyDiv);
+        cartItem.append(img, details);
+        cart.append(cartItem);
+    });
+    const totalDiv = document.createElement("div");
+    totalDiv.className = "total";
+    totalDiv.innerText = "Total: " + total;      
+    cart.append(totalDiv);
+}
+    function getProducts() {
+        axios.get("https://dummyjson.com/products?limit=20")
+            .then(res => genTable(res.data.products));
+    }
+    getProducts();
+</script>
+</body>
+</html>

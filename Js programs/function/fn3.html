@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function sortNums(a,b,c)
+        {
+           return (a < b && a < c)?(b < c ? a+" "+b+" "+c:a+" "+c+" "+b):(b < a && b < c)?(a < c ? b+" "+a+" "+c:b+" "+c+" "+a):(a < b ? c+" "+a+" "+b:c+" "+b+" "+a)
+        }
+        var ascending = sortNums(45,7,68);
+        console.log(ascending);
+    </script>
+</body>
+</html>
+<!-- ascending order of an given numbers-->
