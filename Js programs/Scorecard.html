@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScoreCard</title>
+</head>
+<style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20250705/pngtree-cricket-stadium-at-night-filled-with-spectators-and-bright-spotlights-illuminating-image_17468260.webp");
+    }
+    #dd{
+        display: flex;
+        margin: 5px;
+        justify-content: space-evenly;
+    }
+    #d1,#d2{
+        padding: 5px;
+        border: 2px solid;
+        height: 150%;
+        width: 45%;
+        color: white;
+        
+    }
+    #ii{
+        display: inline-block;
+        width: 80px;
+    }
+    #pl{
+        padding: 10px;
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto;
+        grid-template-rows: auto;
+        align-items: center;
+        align-self: center;
+        
+    }
+    .popup{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+
+    padding: 60px 120px;
+    font-size: 100px;
+    font-weight: 800;
+    letter-spacing: 8px;
+
+    border-radius: 25px;
+    text-align: center;
+
+    background: linear-gradient( rgb(255, 81, 0), rgb(255, 255, 255), rgb(0, 255, 89));
+    color: rgb(43, 0, 255);
+    
+
+    opacity: 0;
+    z-index: 2000;
+}
+
+.popup.show{
+    animation: explode 0.6s ease forwards, ease 0.6s;
+}
+
+@keyframes explode {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+}
+
+
+</style>
+<body>
+    <h1 align="center" style="color: aqua;font-size: 50px;">Cricket Score Card</h1>
+    <div id="dd">
+        <div id="d1">
+            <h1 align="center">Score:
+                <span id="s1">0</span>
+                <span>/</span>
+                <span id="s2">0</span>
+            </h1>
+            <div align="center" style="justify-content: space-evenly; padding: 10px;">
+                <p style="font-size: 20px;"> Current Ball</p>
+                <div>
+                <button class="ballBtn" onclick="dot()" style="background-color: rgb(237, 224, 149);width: auto;height: auto;font-size: 20px; margin: 5px;">0</button>
+                <button class="ballBtn" onclick="one()" style="background-color: rgb(237, 224, 149);;width: auto;height: auto;font-size: 20px; margin: 5px;">1</button>
+                <button class="ballBtn" onclick="two()" style="background-color: rgb(237, 224, 149);;width: auto;height: auto;font-size: 20px; margin: 5px;">2</button>
+                <button class="ballBtn" onclick="three()" style="background-color: rgb(237, 224, 149);;width: auto;height: auto;font-size: 20px; margin: 5px;">3</button>
+                <button class="ballBtn" onclick="four()" style="background-color: rgb(237, 224, 149);;width: auto;height: auto;font-size: 20px; margin: 5px;">4</button>
+                <button class="ballBtn" onclick="five()" style="background-color: rgb(237, 224, 149);;width: auto;height: auto;font-size: 20px; margin: 5px;">5</button>
+                <button class="ballBtn" onclick="six()" style="background-color: rgb(237, 224, 149);;width: auto;height: auto;font-size: 20px; margin: 5px;">6</button>
+                <button class="ballBtn" onclick="wide()" style="background-color: rgb(237, 224, 149);;width: auto;height: auto;font-size: 20px; margin: 5px;">Wide</button>
+                <button class="ballBtn" onclick="noball()" style="background-color: rgb(237, 224, 149);;width: auto;height: auto;font-size: 20px; margin: 5px;">No Ball</button>
+                </div>
+
+            </div>
+            <div align="center" style="display: inline-block; width:auto; display: flex; padding: 10px; justify-content: space-evenly;">
+                <h4 style="margin: 7px;">Wides: <span id="wides" style="color: rgb(255, 255, 255);background-color: black;padding: 5px;font-size: 25px;">0</span></h4>
+                <h4 style="margin: 7px;">No Balls: <span id="nobal" style="color: rgb(255, 255, 255);background-color: black;padding: 5px;font-size: 25px;">0</span></h4>
+                <h4 style="margin: 7px;">Overs Completed: <span id="overs" style="color: rgb(255, 255, 255);background-color: black;padding: 5px;font-size: 25px;">0</span></h4>
+            </div>
+            <div>
+                <h3 align="center" >Over[<span id="currover"></span>] Score Line:
+                    <span id="crrovr" style="color: rgb(255, 255, 255);background-color: black;padding: 5px;font-size: 25px;"></span>
+                </h3>
+            </div>
+            <div align="center" style="color: aqua;">
+            <button id="btnst" style="font-size: 20px;  background-color: aqua; width: 150px;height: 30px;" onclick="start()">Start Match</button>
+            </div>
+
+        </div>
+        
+
+
+        <div id="d2">
+            <h3 align="center">Players</h3>
+            <h4 align="center">RCB (Batting)  <->  CSK (Yet To Bat)</h4>
+            <div id="pl">
+                <h4>Name</h4>
+                <h4>Score</h4>
+                <h4>6s</h4>
+                <h4>4s</h4>
+                <h4>Balls</h4>
+                <h4>SR</h4>
+
+                <p>1.Virat Kohli</p>
+                <p id="p1-s">0</p>  
+                <p id="p1-6">0</p>
+                <p id="p1-4">0</p>
+                <p id="p1-b">0</p>
+                <p id="p1-sr">0</p>
+
+                <p>2.AB de Villiers</p>
+                <p id="p2-s">0</p>  
+                <p id="p2-6">0</p>
+                <p id="p2-4">0</p>
+                <p id="p2-b">0</p>
+                <p id="p2-sr">0</p>  
+
+                <p>3.Devdutt Padikkal</p>
+                <p id="p3-s">0</p>
+                <p id="p3-6">0</p>
+                <p id="p3-4">0</p>
+                <p id="p3-b">0</p>
+                <p id="p3-sr">0</p>
+
+                <p>4.Glenn Maxwell</p>
+                <p id="p4-s">0</p>
+                <p id="p4-6">0</p>
+                <p id="p4-4">0</p>
+                <p id="p4-b">0</p>
+                <p id="p4-sr">0</p>
+
+                <p>5.Shivam Dube</p>
+                <p id="p5-s">0</p>
+                <p id="p5-6">0</p>
+                <p id="p5-4">0</p>
+                <p id="p5-b">0</p>
+                <p id="p5-sr">0</p>
+
+                <p>6.Yuzvendra Chahal</p>
+                <p id="p6-s">0</p>
+                <p id="p6-6">0</p>
+                <p id="p6-4">0</p>
+                <p id="p6-b">0</p>
+                <p id="p6-sr">0</p>
+
+                <p>7.Mohammed Siraj</p>
+                <p id="p7-s">0</p>
+                <p id="p7-6">0</p>
+                <p id="p7-4">0</p>
+                <p id="p7-b">0</p>
+                <p id="p7-sr">0</p>
+
+                <p>8.Chris Morris</p>
+                <p id="p8-s">0</p>
+                <p id="p8-6">0</p>
+                <p id="p8-4">0</p>
+                <p id="p8-b">0</p>
+                <p id="p8-sr">0</p>
+
+                <p>9.Harshal Patel</p>
+                <p id="p9-s">0</p>
+                <p id="p9-6">0</p>
+                <p id="p9-4">0</p>
+                <p id="p9-b">0</p>
+                <p id="p9-sr">0</p>
+
+                <p>10.Avinash Sable</p>
+                <p id="p10-s">0</p>
+                <p id="p10-6">0</p>
+                <p id="p10-4">0</p>
+                <p id="p10-b">0</p>
+                <p id="p10-sr">0</p>
+
+                <p>11.Akash Deep</p>
+                <p id="p11-s">0</p>
+                <p id="p11-6">0</p>
+                <p id="p11-4">0</p>
+                <p id="p11-b">0</p>
+                <p id="p11-sr">0</p>
+
+            </div>
+
+        </div>
+    </div>
+    <div id="popup" class="popup">
+    <span id="popupText"></span>
+</div>
+
+    <script>
+        var sc=0;
+        var wds=0;
+        var nbs=0;
+        var crov= "";
+        var flagco=0;
+        var ovrcomp=0;
+        var co=1;
+        disableButtons();
+
+        function start(){
+            currover();
+            enableButtons();
+            var b=document.getElementById("btnst")
+            b.disabled=true
+        }
+        function disableButtons(){
+    var buttons = document.getElementsByClassName("ballBtn");
+    for(var i = 0; i < buttons.length; i++){
+        buttons[i].disabled = true;
+        buttons[i].style.opacity = "0.5";
+    }
+}
+
+function enableButtons(){
+    var buttons = document.getElementsByClassName("ballBtn");
+    for(var i = 0; i < buttons.length; i++){
+        buttons[i].disabled = false;
+        buttons[i].style.opacity = "1";
+    }
+}
+
+
+        function currover(){
+            document.getElementById("currover").innerText=co
+            currover.innerText=co
+
+            if (flagco>=6){
+                ovrcomp+=1;
+                co+=1;
+                document.getElementById("overs").innerText=ovrcomp
+                overs.innerText=ovrcomp
+                crov="";
+                flagco=0;
+            }
+        }
+
+        function dot(){
+            crov+=" 0 ";
+            document.getElementById("crrovr").innerText=crov
+            crrovr.innerText=crov
+            sc+=0;
+            document.getElementById("s1").innerText=sc
+            s1.innerText=sc
+            flagco+=1;
+            currover();
+        }
+        function one(){
+            crov+=" 1 ";
+            document.getElementById("crrovr").innerText=crov
+            crrovr.innerText=crov
+            sc+=1;
+            document.getElementById("s1").innerText=sc
+            s1.innerText=sc
+            flagco+=1;
+            currover();
+        }
+        function two(){
+            crov+=" 2 ";
+            document.getElementById("crrovr").innerText=crov
+            crrovr.innerText=crov
+            sc+=2;
+            document.getElementById("s1").innerText=sc
+            s1.innerText=sc
+            flagco+=1;
+            currover();
+        }
+        function three(){
+            crov+=" 3 ";
+            document.getElementById("crrovr").innerText=crov
+            crrovr.innerText=crov
+            sc+=3;
+            document.getElementById("s1").innerText=sc
+            s1.innerText=sc
+            flagco+=1;
+            currover();
+        }
+        function four(){
+            crov+=" 4 ";
+            document.getElementById("crrovr").innerText=crov
+            crrovr.innerText=crov
+            sc+=4;
+            document.getElementById("s1").innerText=sc
+            s1.innerText=sc
+            flagco+=1;
+            currover();
+            
+            showPopup("FOUR");
+
+
+        }
+        function five(){
+            crov+=" 5 ";
+            document.getElementById("crrovr").innerText=crov
+            crrovr.innerText=crov
+            sc+=5;
+            document.getElementById("s1").innerText=sc
+            s1.innerText=sc
+            flagco+=1;
+            currover();
+        }
+        function six(){
+            crov+=" 6 ";
+            document.getElementById("crrovr").innerText=crov
+            crrovr.innerText=crov
+            sc+=6;
+            document.getElementById("s1").innerText=sc
+            s1.innerText=sc
+            flagco+=1;
+            currover();
+            showPopup("SIX");
+
+
+        }
+        function wide(){
+            crov+=" WD ";
+            document.getElementById("crrovr").innerText=crov
+            crrovr.innerText=crov
+            sc+=1;
+            wds+=1;
+            document.getElementById("s1").innerText=sc
+            s1.innerText=sc
+            document.getElementById("wides").innerText=wds
+            wides.innerText=wds
+        }
+        function noball(){
+            crov+=" NB ";
+            document.getElementById("crrovr").innerText=crov
+            crrovr.innerText=crov
+            nbs+=1;
+            document.getElementById("s1").innerText=sc
+            s1.innerText=sc
+            document.getElementById("nobal").innerText=nbs
+            nobal.innerText=nbs
+            showPopup("Free Hit");
+        }
+
+        function showPopup(text){
+    var popup = document.getElementById("popup");
+    var popupText = document.getElementById("popupText");
+
+    popupText.innerText = text;
+    popup.classList.add("show");
+
+    document.body.classList.add("flash");
+
+    setTimeout(function(){
+        popup.classList.remove("show");
+        document.body.classList.remove("flash");
+    },1500);
+}
+
+
+    </script>
+</body>
+</html>

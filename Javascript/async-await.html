@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        async function addseries(a, b) {
+            return await add(a, b);
+        }
+        function add(a, b) {
+            let k=0;
+            for(let i=a; i<=b; i++) {
+                k += i;
+            }
+            return k;
+        }
+        console.log("Hiii-1");
+        addseries(1, 999999999).then(function(result){console.log(result)});
+        console.log("Hiii-2");
+    </script>
+</body>
+</html>

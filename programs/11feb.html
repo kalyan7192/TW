@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        async function sum(a, b) {
+            return a + b;
+        }
+        var result = sum(5, 10);
+        console.log(result);
+        console.log("This is a simple JavaScript program that calculates the sum of two numbers and logs the result to the console.");
+
+        function apiCall(url) {
+            fetch(url)
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(data){
+                console.log(data);
+            })
+        }
+
+        apiCall("https://dummyjson.com/products").then(function(data){console.log(data)});
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1 id="d1"></h1>
+    <button onclick="toggle()" id="btn">play</button>
+
+</body>
+<script>
+    var count=0
+    var flag="pause"
+    var t1
+
+    function start(){
+        t1=setInterval(function(){
+        count++
+        document.getElementById("d1").innerText=count
+       
+    },500)
+    }
+    function toggle(){
+        console.log(flag)
+        if(flag=="pause"){
+            start()
+            flag="play"
+            document.getElementById("btn").innerText="pause"
+        }
+        else{
+            clearInterval(t1)
+            flag="pause"
+            document.getElementById("btn").innerText="play"
+        }
+            
+
+        }
+        
+</script>
+</html>
