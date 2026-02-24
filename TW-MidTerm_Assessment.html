@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+<style>
+    body{
+        background-color: gray;
+    }
+    #products {
+            border: 2px solid;
+            width: 98%;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 10px;
+            
+        }
+    #products div1 {
+            width: 180px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 5px;
+            background-color: white;
+            
+        }
+    #products img {
+            width: 150px;
+        }
+    #popup{
+        width: auto;
+        display: flex;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        overflow: hidden;
+    }
+    #popup div {
+            width: auto;
+            text-align: center;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 10px;
+            background-color: white;
+            border: 2px solid black;
+        }
+    #popup img{
+        width: 150px;
+    }
+    #popup button{
+        display: flex;
+        position: absolute;
+        right: 3%;
+        top: 9%;
+    }
+</style>
+<body>
+        <div id="products">
+        <h1 style="width:100%; text-align:center; color: white">Products</h1>
+        
+        <div id="popup" style="width: 50%;height: 50%; align-items: center;">
+        </div>
+        </div>
+    
+    <script>
+    function genTable(products) {
+        products.forEach(function(product) {
+            const productCard = document.createElement("div1");
+            const img = document.createElement("img");
+            img.src = product.thumbnail;
+            const title = document.createElement("h4");
+            title.innerText = product.title;
+            productCard.appendChild(img);
+            productCard.appendChild(title);
+            document.getElementById("products").appendChild(productCard);
+            productCard.onclick=function(){
+                popupshow(product);
+            }
+        });
+    console.log(products)
+    }
+
+    function popupshow(product){
+        document.getElementById("popup").innerHTML=""
+
+        const popupcard = document.createElement("div");
+
+        const btn = document.createElement("button");
+        btn.innerText="X";
+        btn.onclick=function(){
+            popupshow();
+        }
+        
+            const img = document.createElement("img");
+            img.src = product.thumbnail;
+            const title = document.createElement("h4");
+            title.innerText = product.title;
+            const price = document.createElement("h5");
+            price.innerText = product.price;
+            const description = document.createElement("p")
+            description.innerText=product.description;
+            popupcard.appendChild(btn);
+            popupcard.appendChild(img);
+            popupcard.appendChild(title);
+            popupcard.appendChild(price)
+            popupcard.appendChild(description)
+            
+            document.getElementById("popup").appendChild(popupcard)
+    }
+
+    function getProducts() {
+        axios.get("https://dummyjson.com/products")
+            .then(res => genTable(res.data.products));
+    }
+    getProducts();
+    </script>
+</body>
+</html>
