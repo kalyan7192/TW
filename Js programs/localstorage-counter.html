@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Count: <span id="cnt">0</span></h1>
+    <button onclick="increment()">Increment</button>
+    <button onclick="reset()">Reset</button>
+    <script>
+
+        var count=window.localStorage.getItem("Count") || 0;
+        document.getElementById("cnt").innerText=count;
+        function increment(){
+            count++;
+            document.getElementById("cnt").innerText=count;
+            window.localStorage.setItem("Count",count);
+        }
+        function reset(){
+            count=0;
+            document.getElementById("cnt").innerText=count;
+            window.localStorage.clear();
+        }
+
+
+
+
+        // var count=0;
+        // document.getElementById("cnt").innerText=count;
+        // function increment(){
+        //     count++;
+        //     document.getElementById("cnt").innerText=count;
+        //     window.localStorage.setItem("Count",count);
+        // }
+        // var storedcount=window.localStorage.getItem("Count");
+        // count=storedcount;
+        // document.getElementById("cnt").innerText=count;
+
+        // window.localStorage.setItem("Name","Kalyan");
+    </script>
+</body>
+</html>

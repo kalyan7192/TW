@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            name: "Kalyan",
+            city: "Hyderabad"
+        }
+        var b = obj.toString();
+        console.log(b);
+        var c = JSON.stringify(obj);
+        console.log(c);
+
+        var ar=[1,2,3,4,5]
+        var d=ar.toString();
+        console.log(d);
+        var e=JSON.stringify(ar);
+        console.log(e);
+
+
+        var br=[
+            {
+                name:"Kalyan",
+                city:"Hyderabad"
+            },
+            {
+                name:"Ravi",
+                city:"Bangalore"
+            }
+        ]
+        var f=br.toString();
+        console.log(f);
+        var g=JSON.stringify(br);
+        console.log(g);
+
+
+        var hh=JSON.parse(g);
+        console.log(hh);
+    </script>
+</body>
+</html>

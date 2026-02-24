@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <textarea name="todo" id="todoInput"></textarea>
+    <button onclick="addTodo()">Add Todo</button>
+    <button onclick="clearTodos()">Clear Todos</button>
+    <ul id="todoList"></ul>
+    <script>
+        function addTodo() {
+            const todoInput = document.getElementById("todoInput");
+            const todoList = document.getElementById("todoList");
+            const todoText = todoInput.value;
+            if (todoText !== "") {
+                const li = document.createElement("li");
+                li.textContent = todoText;
+                todoList.appendChild(li);
+                todoInput.value = "";
+            }
+        }
+        function clearTodos() {
+            const todoList = document.getElementById("todoList");
+            todoList.innerHTML = "";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="addtodo()">Add ToDoList</button>
+    <script>
+        class ToDoList{
+            category;
+            todos=[];
+            constructor(cat){
+                this.category=cat;
+                this.inittodo();
+
+            }
+            inittodo(){
+                var ntlist = document.createElement("ul");
+                ntlist.setAttribute("id",this.category);
+                var cathead=document.createElement("h2");
+                cathead.innerText=this.category;
+                ntlist.appendChild(cathead);
+                var ntdbox = document.createElement("input");
+                ntdbox.setAttribute("id",this.category+"box");
+                ntlist.appendChild(ntdbox);
+                var addtodoBtn = document.createElement("button")
+                addtodoBtn.innerText = "Add ToDo"
+                var temp=this;
+                addtodoBtn.onclick=()=>{
+                    console.log(temp);
+                    var newtodoitem = document.getElementById(this.category + "box").value;
+                    this.addTodo(newtodoitem)
+                }
+                ntlist.appendChild(addtodoBtn)
+                document.body.appendChild(ntlist);
+            }
+            addTodo(todo){
+                this.todos.push(todo);
+                var ntlist=document.createElement("li");
+                ntlist.innerText=todo;
+                document.getElementById(this.category).appendChild(ntlist);
+
+            }
+            deleteTodo(i){
+                this.todos.splice(i,1);
+            }
+        }
+        var todolist1 = new ToDoList("Finance");
+        todolist1.addTodo("pay rent")
+        todolist1.addTodo("electricity bill")
+
+        var todolist2 = new ToDoList("Food");
+        todolist2.addTodo("pay mess fee")
+
+        function addtodo(){
+            var cat=prompt("Enter category");
+            var todo=prompt("Enter todo");
+            if(cat==todolist1.category){
+                todolist1.addTodo(todo);
+            }
+            else if(cat==todolist2.category){
+                todolist2.addTodo(todo);
+            }
+            else{
+                var newlist = new ToDoList(cat);
+                newlist.addTodo(todo);
+            }
+        }
+    </script>
+</body>
+</html>
