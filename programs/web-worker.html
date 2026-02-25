@@ -13,15 +13,17 @@
         console.log("First Line-1")
         function add(ab) {
             var maidworker = new Worker("maid-worker.js")
-                maidworker.postMessage(0);
-                maidworker.onmessage = (x) => {
-                    ab(x.data)
-                }
+            maidworker.postMessage(0);
+            maidworker.onmessage = (x) => {
+                ab(x.data)
+            }
         }
-        add((res) => {    
+        add((res) => {
             console.log("Using Callback: " + res)
+
         })
         console.log("Last Line-1");
+
 
 
 
@@ -29,7 +31,7 @@
         //promises
 
         console.log("First Line-2")
-        function add() {
+        function add1() {
             var maidworker = new Worker("maid-worker.js")
             var p = new Promise((resolve, reject) => {
                 maidworker.postMessage(0);
@@ -40,7 +42,7 @@
             })
             return p
         }
-        add()
+        add1()
         console.log("Last Line-2");
     </script>
 </body>
