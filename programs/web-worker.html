@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="maid-worker.js"></script>
+
+<body>
+    <script>
+        console.log("First Line-1")
+        function add(ab) {
+            var maidworker = new Worker("maid-worker.js")
+                maidworker.postMessage(0);
+                maidworker.onmessage = (x) => {
+                    ab(x.data)
+                }
+        }
+        add((res) => {    
+            console.log("Using Callback: " + res)
+        })
+        console.log("Last Line-1");
+
+
+
+
+        //promises
+
+        console.log("First Line-2")
+        function add() {
+            var maidworker = new Worker("maid-worker.js")
+            var p = new Promise((resolve, reject) => {
+                maidworker.postMessage(0);
+                maidworker.onmessage = (x) => {
+                    console.log("Using Promise: " + x.data)
+                    resolve(x.data)
+                }
+            })
+            return p
+        }
+        add()
+        console.log("Last Line-2");
+    </script>
+</body>
+
+</html>

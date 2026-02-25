@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+<style>
+    body {
+        background-color: gray;
+    }
+
+    #recipes {
+        border: 2px solid;
+        width: 98%;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px;
+
+    }
+
+    #recipes div1 {
+        width: 180px;
+        text-align: center;
+        border-radius: 10px;
+        margin: 10px;
+        padding: 5px;
+        background-color: white;
+
+    }
+
+    #recipes img {
+        width: 150px;
+    }
+
+    #popup {
+        width: auto;
+        display: flex;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        overflow: hidden;
+        opacity: 100%;
+    }
+
+    #popup div {
+        width: auto;
+        text-align: center;
+        border-radius: 10px;
+        margin: 10px;
+        padding: 10px;
+        background-color: white;
+        border: 2px solid black;
+    }
+
+    #popup img {
+        width: 150px;
+    }
+
+    #popup button {
+        display: flex;
+        position: absolute;
+        right: 3%;
+        top: 9%;
+    }
+
+
+</style>
+
+<body>
+    <div id="recipes">
+        <h1 style="width:100%; text-align:center; color: white">Recipes</h1>
+        <div id="popup" style="width: 50%;height: 50%; align-items: center;"></div>
+    </div>
+
+    <script>
+        function genTable(recipes) {
+            recipes.forEach(function (product) {
+                const productCard = document.createElement("div1");
+                const img = document.createElement("img");
+                img.src = product.image;
+                const title = document.createElement("h4");
+                title.innerText = product.name;
+                productCard.appendChild(img);
+                productCard.appendChild(title);
+                document.getElementById("recipes").appendChild(productCard);
+                productCard.onclick = function () {
+                    popupshow(product);
+
+                }
+            });
+            console.log(recipes)
+        }
+
+        function popupshow(product) {
+            var rest=document.createElement("div")
+            rest.style.backgroundColor="rgba(0,0,0,0.5)";
+            rest.style.width="100%";    
+            rest.style.height="100%";
+            rest.style.position="fixed";
+            rest.style.top="0";
+            rest.style.left="0";
+            
+
+            document.getElementById("popup").innerHTML = "";
+
+            const popupcard = document.createElement("div");
+
+            const btn = document.createElement("button");
+
+            btn.innerText = "X";
+            btn.onclick = function () {
+                popupshow();
+            }
+
+            const img = document.createElement("img");
+            img.src = product.image;
+            const title = document.createElement("h4");
+            title.innerText = product.name;
+            const price = document.createElement("h5");
+            price.innerText = product.price;
+            const description = document.createElement("p")
+            description.innerText = product.ingredients;
+            popupcard.appendChild(btn);
+            popupcard.appendChild(img);
+            popupcard.appendChild(title);
+            popupcard.appendChild(description);
+            rest.appendChild(popupcard);
+        
+            document.getElementById("popup").appendChild(popupcard)
+
+        }
+
+        function getrecipes() {
+            axios.get("https://dummyjson.com/recipes")
+                .then(res => genTable(res.data.recipes));
+        }
+        getrecipes();
+    </script>
+</body>
