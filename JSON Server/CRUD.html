@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form align="center" style="margin-top: 20px;">
+        <input type="text" name="ntitle" placeholder="Action" required style="width: 250px;">
+        <select name="nstatus">
+            <option>Pending</option>
+            <option>Completed</option>
+        </select>
+        <button onclick="addTodo(event)">Add Todo</button>
+
+
+    </form>
+    <table align="center" border="2px solid" style="border-collapse: collapse; width: 50%; margin-top: 20px; align-items: center; text-align: center;">
+        <thead>
+            <tr style="height: 30px;">
+                <td style="height: 30px;">Id</td>
+                <td style="height: 30px;">Title</td>
+                <td style="height: 30px;">Status</td>
+                <td style="height: 30px;">Operation</td>
+            </tr>
+        </thead>
+        <tbody id="todos">
+
+        </tbody>
+    </table>
+</body>
+<script>
+    function getTodos() {
+        document.querySelector("#todos").innerHTML = "";    
+        fetch("http://localhost:3000/students")
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(({ id, status, title}) => {
+                    var ntr = `<tr style="height: 30px; padding: 5px;margin: 5px;">
+                <td>${id}</td>
+                <td>${title}</td>
+                <td>${status}</td>
+                <td><button onclick="deleteTodo(${id})">Delete</button></td>    
+            </tr>`
+                    document.querySelector("#todos").innerHTML += ntr;
+                })
+            })
+    }
+    function addTodo(e) {
+        e.preventDefault();
+        var title = document.querySelector("input[name='ntitle']").value;
+        var status = document.querySelector("select[name='nstatus']").value;
+        fetch("http://localhost:3000/students", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ title, status })
+        }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+                getTodos();
+            })
+            getTodos();
+    }
+    function deleteTodo(id) {
+        fetch(`http://localhost:3000/students/${id}`, {
+            method: "DELETE"
+        }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+                getTodos();
+            })
+            getTodos();
+    }
+    getTodos();
+</script>
+
+</html>
