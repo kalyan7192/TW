@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+
 <body>
     <h1 align="center">Recipes</h1>
     <table id="table" border="2px solid">
         <thead style="width: auto;" id="head">
             <th onclick="sortname()">Name</td>
-            <th onclick="sortrating()">Rating</td>
+            <th onclick="sortingredients()">Ingredients</td>
             <th onclick="sorttime()">Cook Time(Min)</td>
+            <th onclick="sortrating()">Rating</td>
+            <th onclick="sortinstructions()">Instructions</th>
+
         </thead>
-        
+
     </table>
     <button onclick="prev()" id="pp" disabled>Previous</button>
     <button onclick="next()" id="nn">Next</button>
@@ -23,88 +28,117 @@
     var previ = 0;
     var nexti = 10;
     var i;
-        function prev(){
-            if(previ==10||previ==20){
+    function prev() {
+        if (previ == 10 || previ == 20) {
             previ = previ - 10;
-            nexti = nexti - 10; 
+            nexti = nexti - 10;
             getrec()
             pdis();
             ndis();
-            }
         }
-        function pdis(){
-            if(previ==0){
-                var b1 = document.getElementById('pp');
-                b1.disabled = true;
-            }
-            else{
-                var b1 = document.getElementById('pp');
-                b1.disabled = false;
+    }
+    function pdis() {
+        if (previ == 0) {
+            var b1 = document.getElementById('pp');
+            b1.disabled = true;
         }
+        else {
+            var b1 = document.getElementById('pp');
+            b1.disabled = false;
         }
-        function next(){
-            if(nexti!=30){
+    }
+    function next() {
+        if (nexti != 30) {
             previ = previ + 10;
             nexti = nexti + 10;
             getrec();
             pdis();
             ndis();
 
-            }
-        }
-        function ndis(){
-            if(nexti==30){
-                var b2 = document.getElementById('nn');
-                b2.disabled = true;
-            }
-            else{
-                var b2 = document.getElementById('nn');
-                b2.disabled = false;
         }
     }
-    function genTable(recipes){
-        
-        
+    function ndis() {
+        if (nexti == 30) {
+            var b2 = document.getElementById('nn');
+            b2.disabled = true;
+        }
+        else {
+            var b2 = document.getElementById('nn');
+            b2.disabled = false;
+        }
+    }
+    function genTable(recipes) {
+
+        document.getElementById('table').innerHTML = `<thead style="width: auto;" id="head">
+            <th onclick="sortname()">Name</td>
+            <th onclick="sortingredients()">Ingredients</td>
+            <th onclick="sorttime()">Cook Time(Min)</td>
+            <th onclick="sortrating()">Rating</td>
+            <th onclick="sortinstructions()">Instructions</th>
+        </thead>`
+
         console.log(recipes)
-        
-        for(var i=previ; i<nexti; i++){
+
+        for (var i = previ; i < nexti; i++) {
             var nam = recipes[i].name
             var rat = recipes[i].rating
             var cook = recipes[i].prepTimeMinutes
+            var ins = recipes[i].instructions
+            var ing = recipes[i].ingredients
 
-            var a=document.createElement('td');
-            a.innerText=nam
-            
-            var b=document.createElement('td');
-            b.innerText=rat
+            var a = document.createElement('td');
+            a.innerText = nam
 
-            var c=document.createElement('td');
-            c.innerText=cook
+            var b = document.createElement('td');
+            b.innerText = rat
 
-            var d=document.createElement('tr');
+            var c = document.createElement('td');
+            c.innerText = cook
+
+            var e = document.createElement('td');
+            e.innerText = ins
+
+            var f = document.createElement('td');
+            f.innerText = ing
+
+            var d = document.createElement('tr');
             d.appendChild(a);
-            d.appendChild(b);
+            d.appendChild(f);
             d.appendChild(c);
+            d.appendChild(b);
+            d.appendChild(e);
 
             document.getElementById('table').appendChild(d);
         }
-        
-    }
-    function sortname(){
 
     }
-    function sortrating(){
-
+    function sortname() {
+        axios.get('https://dummyjson.com/recipes?sortBy=name&order=asc')
+            .then(res => genTable(res.data.recipes))
     }
-    function sorttime(){
-
+    function sortrating() {
+        axios.get('https://dummyjson.com/recipes?sortBy=rating&order=desc')
+            .then(res => genTable(res.data.recipes))
     }
-            
-    function getrec(){
+    function sorttime() {
+        axios.get('https://dummyjson.com/recipes?sortBy=prepTimeMinutes&order=asc')
+            .then(res => genTable(res.data.recipes))
+    }
+    function sortinstructions() {
+        axios.get('https://dummyjson.com/recipes?sortBy=instructions&order=asc')
+            .then(res => genTable(res.data.recipes))
+    }
+    function sortingredients() {
+        axios.get('https://dummyjson.com/recipes?sortBy=ingredients&order=asc')
+            .then(res => genTable(res.data.recipes))
+    }
+
+    function getrec() {
         axios.get('https://dummyjson.com/recipes')
-    .then(res => genTable(res.data.recipes))
+            .then(res => genTable(res.data.recipes))
     }
     getrec()
-    
+
 </script>
+
 </html>
