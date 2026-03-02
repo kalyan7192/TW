@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+    .cardgroup {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .card {
+        list-style: none;
+        border: 1px solid gray;
+        padding: 10px;
+        border-radius: 20px;
+        width: 200px;
+        margin: 20px;
+        background-color: skyblue;
+    }
+</style>
+
+<body>
+    <h1>Hello Kalyan 10+20</h1>
+    <div id="root"></div>
+    <div id="root2"></div>
+    <script type="text/babel">
+
+        var mystudents = [
+            { name: 'Kalyan', age: 30, place: 'Hyderabad' },
+            { name: 'Ravi', age: 25, place: 'Bangalore' },
+            { name: 'Suresh', age: 28, place: 'Chennai' },
+            { name: 'Naresh', age: 32, place: 'Mumbai' },
+            { name: 'Ramesh', age: 27, place: 'Pune' }
+        ]
+
+        var jsx3 = <ul class="cardgroup">
+            {
+                mystudents.map(function (student) {
+                    return <li class="card">
+                        <h2>{student.name}</h2>
+                        <h4>Age: {student.age}</h4>
+                        <h4>Place: {student.place}</h4>
+                    </li>
+                })
+            }
+        </ul>
+        ReactDOM.render(jsx3, document.getElementById('root2'))
+
+        var jsx4 = <table border="1" cellPadding="10" cellSpacing="0">
+            <thead style={{ backgroundColor: "grey", color: "white" }}   >
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Place</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    mystudents.map(function (student) {
+                        return <tr>
+                            <td>{student.name}</td>
+                            <td>{student.age}</td>
+                            <td>{student.place}</td>
+                        </tr>
+                    })
+                }
+            </tbody>
+        </table>
+        ReactDOM.render(jsx4, document.getElementById('root'))
+
+
+
+
+
+
+        // var students = ['Kalyan','Ravi','Suresh','Naresh','Ramesh']
+        // var jsx2 = <ul>
+        //     {
+        //         students.map(function(student){
+        //             return <li>
+        //                 <h2>{student}</h2>
+        //                 </li>
+
+        //         })
+        //     }
+        // </ul>
+        // ReactDOM.render(jsx2,document.getElementById('root2'))
+
+
+
+
+
+
+
+        // var k = "Kalyan"
+
+        // var jsx1 = <h1 style={{color:"green",fontFamily:"verdana"}}>Hello JSX {k.toUpperCase()}  {10+30}</h1>
+        // ReactDOM.render(jsx1,document.getElementById('root2'))
+
+
+
+
+        // // reactjs
+        // var el1 = React.createElement('h1',{style:{color:"blue",fontFamily:"Arial"}}, "Hello React")
+        // ReactDOM.render(el1,document.getElementById('root'))
+
+
+
+        // // JS
+        // var el = document.createElement('h1')
+        // el.innerText = "Hello JS"
+        // el.style.color = "red"
+        // el.style.fontFamily = "verdana"
+        // document.getElementById('root').appendChild(el)
+
+        // console.dir($)
+        // console.log(React)
+    </script>
+</body>
+
+</html>

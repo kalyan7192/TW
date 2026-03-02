@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+    #root {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .cardgroup {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .card {
+        list-style: none;
+        border: 2px solid gray;
+        padding: 10px;
+        border-radius: 20px;
+        width: 220px;
+        height: 500px;
+        margin: 10px;
+        background-color: skyblue;
+        align-items: center;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    #image {
+        width: 150px;
+        height: 200px;
+        border-radius: 20px;
+    }
+    #hp, #hr {
+        margin: 0px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+    }
+    .butto{
+        padding: 10px;
+        font-size: 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: lightyellow;
+        border: 1px solid black;
+        color: black;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+</style>
+
+<body>
+
+    <button onClick=showproducts();upd();btncheck() class="butto" id="bt1">Show Products</button>
+    <button onClick=showrecipes();upd();btncheck() class="butto" id="bt2">Show Recipes</button>
+
+    <br>
+    <h1 id="hp" style="display: none;">Products</h1>
+    <h1 id="hr" style="display: none;">Recipes</h1>
+    <div id="root"></div>
+    
+    <br>
+
+    <button onClick=prev() id="prebtn" class="butto" disabled>Previous</button>
+    <button onClick=next() id="nxtbtn" class="butto" disabled>Next</button>
+
+    <script type="text/babel">
+
+        var flag = 0;
+        var a1 = 0;
+        var b1 = 5;
+
+        var btn2 = document.getElementById("nxtbtn");
+        var btn1 = document.getElementById("prebtn");
+        var bt1 = document.getElementById("bt1");
+        var bt2 = document.getElementById("bt2");
+
+        function upd() {
+            a1 = 0;
+            b1 = 5;
+        }
+
+        function btncheck() {
+            if (a1 <= 0) {
+                btn1.disabled = true;
+                btn1.style.cursor = "not-allowed";
+
+            }
+            else {
+                btn1.disabled = false;
+            }
+
+            if (a1 >= 25) {
+                btn2.disabled = true;
+                btn2.style.cursor = "not-allowed";
+            }
+            else {
+                btn2.disabled = false;
+            }
+        }
+
+        function show() {
+            if (flag == 1) {
+                showproducts();
+            }
+            else if (flag == 2) {
+                showrecipes();
+            }
+        }
+
+        function prev() {
+            btncheck();
+            a1 -= 5;
+            b1 -= 5;
+            btncheck();
+            show();
+        }
+
+        function next() {
+            btncheck();
+            a1 += 5;
+            b1 += 5;
+            btncheck();
+            show();
+        }
+
+        function showproducts() {
+            flag = 1;
+
+            bt1.disabled = true;
+            bt1.style.cursor = "not-allowed";
+            bt2.disabled = false;
+            bt2.style.cursor = "pointer";
+
+
+            document.getElementById("hp").style.display = "block";
+            document.getElementById("hr").style.display = "none";
+
+            var d = <h1>Loading...</h1>
+            ReactDOM.render(d, document.getElementById('root'))
+
+
+            // products
+            fetch("https://dummyjson.com/products")
+                .then(res => res.json())
+                .then(data => gen(data.products))
+
+            function gen(products) {
+                var arr = [];
+                for (var i = a1; i < b1; i++) {
+                    arr.push({
+                        name: products[i].title,
+                        cost: products[i].price,
+                        photo: products[i].thumbnail,
+                        desc: products[i].description
+                    });
+                }
+                display(arr);
+            }
+
+            function display(arr) {
+                var display = <ul class="cardgroup" type="none">
+                    {
+                        arr.map(function (a) {
+                            return <li class="card">
+                                <img src={a.photo} id="image"></img>
+                                <h2>{a.name}</h2>
+                                <h4>Cost: {a.cost}</h4>
+                                <p>Description: {a.desc}</p>
+                            </li>
+                        })
+                    }
+                </ul>
+                ReactDOM.render(display, document.getElementById('root'))
+            }
+
+        }
+
+        function showrecipes() {
+            flag = 2;
+
+            bt2.disabled = true;
+            bt2.style.cursor = "not-allowed";
+            bt1.disabled = false;
+            bt1.style.cursor = "pointer";
+
+
+            document.getElementById("hr").style.display = "block";
+            document.getElementById("hp").style.display = "none";
+
+            var b = <h1>Loading...</h1>
+            ReactDOM.render(b, document.getElementById('root'))
+
+            // recipes
+
+            fetch("https://dummyjson.com/recipes")
+                .then(res => res.json())
+                .then(data => genrec(data.recipes))
+
+            function genrec(recipes) {
+                var arr1 = [];
+                for (var j = a1; j < b1; j++) {
+                    arr1.push({
+                        name: recipes[j].name,
+                        rating: recipes[j].rating,
+                        photo: recipes[j].image,
+                        desc: recipes[j].ingredients.join(", ")
+                    });
+                }
+                displayrec(arr1);
+            }
+
+            function displayrec(arr1) {
+                var display1 = <ul class="cardgroup" type="none">
+                    {
+                        arr1.map(function (b) {
+                            return <li class="card">
+                                <img src={b.photo} id="image"></img>
+                                <h2>{b.name}</h2>
+                                <h4>Rating: {b.rating}</h4>
+                                <p>Ingredients: {b.desc}</p>
+                            </li>
+                        })
+                    }
+                </ul>
+                ReactDOM.render(display1, document.getElementById('root'))
+            }
+        }
+
+    </script>
+</body>
+</html>
