@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<body>
+    <style>
+        #even {
+            color: green;
+        }
+
+        #odd {
+            color: red;
+        }
+
+        #male {
+            background-color: lightblue;
+        }
+
+        #female {
+            background-color: lightpink;
+        }
+    </style>
+    <div id="root"></div>
+    <script type="text/babel">
+        const actors = [
+
+            { fullname: "Katrina Kaif", age: 40, gender: "female", placeOfBirth: "Hong Kong", movies: 45 },
+            { fullname: "Mahesh Babu", age: 48, gender: "male", placeOfBirth: "Chennai", movies: 28 },
+            { fullname: "Shraddha Kapoor", age: 36, gender: "female", placeOfBirth: "Mumbai", movies: 30 },
+            { fullname: "Ajith Kumar", age: 52, gender: "male", placeOfBirth: "Hyderabad", movies: 61 },
+            { fullname: "Deepika Padukone", age: 38, gender: "female", placeOfBirth: "Copenhagen", movies: 40 },
+            { fullname: "Vijay Deverakonda", age: 35, gender: "male", placeOfBirth: "Hyderabad", movies: 20 },
+            { fullname: "Nayanthara", age: 39, gender: "female", placeOfBirth: "Bengaluru", movies: 75 },
+            { fullname: "Hrithik Roshan", age: 50, gender: "male", placeOfBirth: "Mumbai", movies: 50 },
+            { fullname: "Sai Pallavi", age: 31, gender: "female", placeOfBirth: "Kotagiri", movies: 20 },
+            { fullname: "Rajinikanth", age: 73, gender: "male", placeOfBirth: "Bengaluru", movies: 170 },
+            { fullname: "Alia Bhatt", age: 30, gender: "female", placeOfBirth: "Mumbai", movies: 25 },
+            { fullname: "Ram Charan", age: 39, gender: "male", placeOfBirth: "Chennai", movies: 20 },
+            { fullname: "Kajal Aggarwal", age: 38, gender: "female", placeOfBirth: "Mumbai", movies: 60 },
+            { fullname: "Ranveer Singh", age: 38, gender: "male", placeOfBirth: "Mumbai", movies: 35 },
+            { fullname: "Trisha Krishnan", age: 40, gender: "female", placeOfBirth: "Chennai", movies: 70 },
+            { fullname: "Nani", age: 40, gender: "male", placeOfBirth: "Hyderabad", movies: 35 },
+            { fullname: "Kriti Sanon", age: 33, gender: "female", placeOfBirth: "New Delhi", movies: 20 },
+            { fullname: "Vikram", age: 57, gender: "male", placeOfBirth: "Chennai", movies: 60 },
+            { fullname: "Priyanka Chopra", age: 41, gender: "female", placeOfBirth: "Jamshedpur", movies: 60 },
+            { fullname: "Allu Arjun", age: 42, gender: "male", placeOfBirth: "Chennai", movies: 25 },
+            { fullname: "Keerthy Suresh", age: 31, gender: "female", placeOfBirth: "Chennai", movies: 30 },
+            { fullname: "Ajay Devgn", age: 54, gender: "male", placeOfBirth: "New Delhi", movies: 120 },
+            { fullname: "Rashmika Mandanna", age: 28, gender: "female", placeOfBirth: "Virajpet", movies: 25 },
+            { fullname: "Shah Rukh Khan", age: 58, gender: "male", placeOfBirth: "New Delhi", movies: 100 },
+            { fullname: "Tamannaah Bhatia", age: 34, gender: "female", placeOfBirth: "Mumbai", movies: 70 },
+            { fullname: "Sivakarthikeyan", age: 39, gender: "male", placeOfBirth: "Singampunari", movies: 25 },
+            { fullname: "Kareena Kapoor", age: 43, gender: "female", placeOfBirth: "Mumbai", movies: 60 },
+            { fullname: "Prabhas", age: 44, gender: "male", placeOfBirth: "Chennai", movies: 25 },
+            { fullname: "Shruti Haasan", age: 38, gender: "female", placeOfBirth: "Chennai", movies: 40 },
+            { fullname: "Salman Khan", age: 58, gender: "male", placeOfBirth: "Indore", movies: 110 },
+            { fullname: "Taapsee Pannu", age: 36, gender: "female", placeOfBirth: "New Delhi", movies: 40 },
+            { fullname: "Ranbir Kapoor", age: 41, gender: "male", placeOfBirth: "Mumbai", movies: 40 },
+            { fullname: "Anushka Shetty", age: 42, gender: "female", placeOfBirth: "Mangaluru", movies: 50 },
+            { fullname: "Jr NTR", age: 40, gender: "male", placeOfBirth: "Hyderabad", movies: 30 },
+            { fullname: "Kiara Advani", age: 32, gender: "female", placeOfBirth: "Mumbai", movies: 20 },
+            { fullname: "Dhanush", age: 40, gender: "male", placeOfBirth: "Chennai", movies: 50 },
+            { fullname: "Anushka Sharma", age: 35, gender: "female", placeOfBirth: "Ayodhya", movies: 20 },
+            { fullname: "Karthi", age: 46, gender: "male", placeOfBirth: "Chennai", movies: 30 },
+            { fullname: "Samantha Ruth Prabhu", age: 36, gender: "female", placeOfBirth: "Chennai", movies: 65 },
+            { fullname: "Akshay Kumar", age: 56, gender: "male", placeOfBirth: "Amritsar", movies: 150 },
+            { fullname: "Vijay", age: 49, gender: "male", placeOfBirth: "Chennai", movies: 68 },
+            { fullname: "Aamir Khan", age: 58, gender: "male", placeOfBirth: "Mumbai", movies: 45 },
+            { fullname: "Nagarjuna", age: 64, gender: "male", placeOfBirth: "Chennai", movies: 100 },
+            { fullname: "Rana Daggubati", age: 39, gender: "male", placeOfBirth: "Chennai", movies: 20 },
+            { fullname: "Kamal Haasan", age: 69, gender: "male", placeOfBirth: "Paramakudi", movies: 220 },
+            { fullname: "Shahid Kapoor", age: 43, gender: "male", placeOfBirth: "New Delhi", movies: 45 },
+            { fullname: "Saif Ali Khan", age: 53, gender: "male", placeOfBirth: "New Delhi", movies: 70 },
+            { fullname: "Varun Tej", age: 34, gender: "male", placeOfBirth: "Hyderabad", movies: 15 },
+            { fullname: "Pawan Kalyan", age: 52, gender: "male", placeOfBirth: "Bapatla", movies: 30 },
+            { fullname: "Suriya", age: 48, gender: "male", placeOfBirth: "Chennai", movies: 50 },
+            { fullname: "Chiranjeevi", age: 68, gender: "male", placeOfBirth: "Mogalthur", movies: 150 },
+            { fullname: "Balakrishna", age: 63, gender: "male", placeOfBirth: "Chennai", movies: 100 },
+            { fullname: "Mohanlal", age: 63, gender: "male", placeOfBirth: "Elanthoor", movies: 350 },
+            { fullname: "Mammootty", age: 72, gender: "male", placeOfBirth: "Chandiroor", movies: 400 },
+            { fullname: "Fahadh Faasil", age: 41, gender: "male", placeOfBirth: "Alappuzha", movies: 50 },
+            { fullname: "Dulquer Salmaan", age: 40, gender: "male", placeOfBirth: "Kochi", movies: 35 },
+            { fullname: "Nivin Pauly", age: 39, gender: "male", placeOfBirth: "Aluva", movies: 40 },
+            { fullname: "Tovino Thomas", age: 35, gender: "male", placeOfBirth: "Irinjalakuda", movies: 35 },
+            { fullname: "Yash", age: 38, gender: "male", placeOfBirth: "Bhuvanahalli", movies: 20 },
+            { fullname: "Puneeth Rajkumar", age: 46, gender: "male", placeOfBirth: "Chennai", movies: 30 },
+            { fullname: "Rashmika", age: 28, gender: "female", placeOfBirth: "Virajpet", movies: 25 },
+            { fullname: "Nazriya Nazim", age: 29, gender: "female", placeOfBirth: "Thiruvananthapuram", movies: 20 },
+            { fullname: "Meena", age: 47, gender: "female", placeOfBirth: "Chennai", movies: 100 },
+            { fullname: "Jyothika", age: 45, gender: "female", placeOfBirth: "Mumbai", movies: 50 },
+            { fullname: "Amala Paul", age: 32, gender: "female", placeOfBirth: "Kochi", movies: 35 },
+            { fullname: "Raashi Khanna", age: 33, gender: "female", placeOfBirth: "New Delhi", movies: 30 },
+            { fullname: "Anupama Parameswaran", age: 28, gender: "female", placeOfBirth: "Irinjalakuda", movies: 25 },
+            { fullname: "Aishwarya Rajesh", age: 34, gender: "female", placeOfBirth: "Chennai", movies: 40 },
+            { fullname: "Priyamani", age: 39, gender: "female", placeOfBirth: "Bengaluru", movies: 50 },
+            { fullname: "Lakshmi Manchu", age: 46, gender: "female", placeOfBirth: "Chennai", movies: 20 },
+            { fullname: "Gopichand", age: 44, gender: "male", placeOfBirth: "Kakinada", movies: 25 },
+            { fullname: "Sharwanand", age: 39, gender: "male", placeOfBirth: "Vijayawada", movies: 30 },
+            { fullname: "Naga Chaitanya", age: 37, gender: "male", placeOfBirth: "Hyderabad", movies: 25 },
+            { fullname: "Naga Shaurya", age: 35, gender: "male", placeOfBirth: "Eluru", movies: 20 },
+            { fullname: "Bellamkonda Sai Sreenivas", age: 30, gender: "male", placeOfBirth: "Guntur", movies: 10 },
+            { fullname: "Kiccha Sudeep", age: 50, gender: "male", placeOfBirth: "Shivamogga", movies: 70 },
+            { fullname: "Upendra", age: 55, gender: "male", placeOfBirth: "Koteshwara", movies: 50 },
+            { fullname: "Ramesh Aravind", age: 59, gender: "male", placeOfBirth: "Kumbakonam", movies: 100 },
+            { fullname: "Jayam Ravi", age: 43, gender: "male", placeOfBirth: "Tirumangalam", movies: 30 },
+            { fullname: "Vishal", age: 46, gender: "male", placeOfBirth: "Chennai", movies: 35 },
+            { fullname: "Hansika Motwani", age: 32, gender: "female", placeOfBirth: "Mumbai", movies: 50 },
+            { fullname: "Nikki Galrani", age: 31, gender: "female", placeOfBirth: "Bengaluru", movies: 30 },
+            { fullname: "Catherine Tresa", age: 34, gender: "female", placeOfBirth: "Dubai", movies: 25 },
+            { fullname: "Regina Cassandra", age: 33, gender: "female", placeOfBirth: "Chennai", movies: 30 },
+            { fullname: "Nivetha Thomas", age: 28, gender: "female", placeOfBirth: "Kannur", movies: 20 },
+            { fullname: "Eesha Rebba", age: 33, gender: "female", placeOfBirth: "Warangal", movies: 20 },
+            { fullname: "Malavika Mohanan", age: 30, gender: "female", placeOfBirth: "Payyanur", movies: 15 },
+            { fullname: "Aditi Rao Hydari", age: 37, gender: "female", placeOfBirth: "Hyderabad", movies: 30 },
+            { fullname: "Shraddha Srinath", age: 33, gender: "female", placeOfBirth: "Udhampur", movies: 20 },
+            { fullname: "Ritu Varma", age: 33, gender: "female", placeOfBirth: "Hyderabad", movies: 20 }
+        ];
+
+        renderTable();
+        sortname();
+        function renderTable() {
+            const jsx = (
+                <table border="1" cellPadding="10" cellSpacing="0" align="center">
+                    <thead style={{ backgroundColor: "lightgray" }}>
+                        <tr>
+                            <th onClick={sortname} style={{ cursor: "pointer" }}>Full Name</th>
+                            <th onClick={sortage} style={{ cursor: "pointer" }}>Age</th>
+                            <th onClick={sortgender} style={{ cursor: "pointer" }}>Gender</th>
+                            <th onClick={sortplace} style={{ cursor: "pointer" }}>Place of Birth</th>
+                            <th onClick={sortmovies} style={{ cursor: "pointer" }}>Movies</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {actors.map((actor) => (
+                            <tr id={actor.gender === "male" ? "male" : "female"}>
+                                <td>{actor.fullname}</td>
+                                <td>{actor.age}</td>
+                                <td>
+                                    {actor.gender}
+                                    {actor.gender === "male" ? " \uD83D\uDC66" : " \uD83D\uDC67"}
+                                </td>
+                                <td>{actor.placeOfBirth}</td>
+                                <td>{actor.movies}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            );
+
+            ReactDOM.render(jsx, document.getElementById("root"));
+        }
+
+        function sortname() {
+            actors.sort((a, b) => a.fullname.localeCompare(b.fullname));
+            renderTable();
+        }
+
+        function sortage() {
+            actors.sort((a, b) => a.age - b.age);
+            renderTable();
+        }
+
+        function sortgender() {
+            actors.sort((a, b) => a.gender.localeCompare(b.gender));
+            renderTable();
+        }
+
+        function sortplace() {
+            actors.sort((a, b) => a.placeOfBirth.localeCompare(b.placeOfBirth));
+            renderTable();
+        }
+
+        function sortmovies() {
+            actors.sort((a, b) => a.movies - b.movies);
+            renderTable();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+    #image {
+        width: 200px;
+        height: 200px;
+    }
+</style>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+
+        // gallery application
+
+        var images = [
+            {
+                url:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200",
+                likes:0
+            },
+            
+            {
+                url:"https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=200",
+                likes:0
+            },
+            {
+                url:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200",
+                likes:0
+            }
+        ]
+        var i = 0;
+        function inc() {
+            if (i >= images.length - 1) {
+                i = -1;
+            }
+            i = i + 1;
+            next();
+            console.log(i);
+        }
+        function like() {
+            images[i].likes = images[i].likes + 1;
+            next();
+        }
+        function next() {
+            var gallery = <div>
+                <img src={images[i].url} alt="Gallery Image" id="image"></img>
+                
+                <button onClick={() => like()}>Like</button>
+                <b>  ({images[i].likes})</b>
+
+                <br />
+
+                <button onClick={() => inc()}>Next</button>
+            </div>
+            ReactDOM.render(gallery, document.getElementById('root'))
+        }
+        next();
+
+
+
+
+
+
+
+        // todolist application
+
+        // var todos = [
+        //     "Learn React",
+        //     "Learn React Router",
+        //     "Learn React Hooks",
+        //     "Learn React Context"
+        // ]
+
+        // function upd() {
+        //     todos.push(document.getElementById("ii").value);
+        //     document.getElementById("ii").value = "";
+        //     display();
+        // }
+
+        // function display() {
+        //     var todolist = <div>
+        //         <input type="text" id="ii" />
+        //         <button onClick={upd}>Add Todo</button>
+        //         <ul>
+        //             {
+        //                 todos.map((t) => {
+        //                     return <li>{t}</li>
+        //                 })
+        //             }
+        //         </ul>
+        //     </div>
+        //     ReactDOM.render(todolist, document.getElementById("root"))
+        // }
+        // display();
+
+
+
+
+
+
+
+
+
+        // var c = 0;
+        // function inc() {
+        //     c++;
+        //     upd();
+        // }
+        // function dec() {
+        //     c--;
+        //     upd();
+        // }
+        // function upd() {
+        //     var jsx = <div>
+        //         <h1>Counter:<span id="cc">{c}</span></h1>
+        //         <h1 id="d2"></h1>
+        //         <button onClick={() => inc()}>Increment</button>
+        //         <button onClick={() => dec()}>Decrement</button>
+        //     </div>
+        //     ReactDOM.render(jsx, document.getElementById('root'));
+        // }
+        // upd();
+
+
+
+
+
+
+
+
+
+
+        // function handleTextChange(e){
+        //     console.log(e.target.value)
+        //     document.getElementById("d2").innerText = e.target.value;
+        // }
+        // var jsx = <div>
+        //     <input type="text" onKeyUp={(e) => handleTextChange(e)} />
+        //     <h1 id="d2" style={{textTransform: "capitalize"}}></h1>
+        //     </div>
+
+
+        // ReactDOM.render(jsx, document.getElementById('root'))
+
+
+
+
+
+
+
+
+        // var jsx = <h1 style={{ cursor: "pointer" }} onClick={() => alert("Hello World!")}>Hello World</h1>
+        // ReactDOM.render(jsx, document.getElementById('root'))
+    </script>
+</body>
+
+</html>

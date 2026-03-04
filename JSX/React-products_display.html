@@ -39,7 +39,7 @@
     }
 
     #image {
-        width: 150px;
+        width: 200px;
         height: 200px;
         border-radius: 20px;
     }
@@ -92,6 +92,7 @@
         var btn1 = document.getElementById("prebtn");
         var bt1 = document.getElementById("bt1");
         var bt2 = document.getElementById("bt2");
+        var b = <h1>Loading...</h1>
 
         function upd() {
             a1 = 0;
@@ -102,18 +103,24 @@
             if (a1 <= 0) {
                 btn1.disabled = true;
                 btn1.style.cursor = "not-allowed";
+                btn1.style.backgroundColor = "lightgray";
 
             }
             else {
                 btn1.disabled = false;
+                btn1.style.backgroundColor = "lightyellow";
+                btn1.style.cursor = "pointer";
             }
 
             if (a1 >= 25) {
                 btn2.disabled = true;
                 btn2.style.cursor = "not-allowed";
+                btn2.style.backgroundColor = "lightgray";
             }
             else {
                 btn2.disabled = false;
+                btn2.style.backgroundColor = "lightyellow";
+                btn2.style.cursor = "pointer";
             }
         }
 
@@ -154,8 +161,8 @@
             document.getElementById("hp").style.display = "block";
             document.getElementById("hr").style.display = "none";
 
-            var d = <h1>Loading...</h1>
-            ReactDOM.render(d, document.getElementById('root'))
+            
+            ReactDOM.render(b, document.getElementById('root'))
 
 
             // products
@@ -206,7 +213,7 @@
             document.getElementById("hr").style.display = "block";
             document.getElementById("hp").style.display = "none";
 
-            var b = <h1>Loading...</h1>
+            
             ReactDOM.render(b, document.getElementById('root'))
 
             // recipes
