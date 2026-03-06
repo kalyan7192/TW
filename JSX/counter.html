@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function Counter(){
+            var [c, sfn] = React.useState(0);
+            function inc(){
+                sfn(c+1)
+            }
+            function dec(){
+                sfn(c-1)
+            }
+           return (
+            <div style={{textAlign: "center", marginTop: "20px", border:"2px solid red", padding: "20px", width:"30%", marginLeft: "auto", marginRight: "auto", display: "inline-block", margin:"20px"}}>
+                <h2>Counter: <h1 style={{color:"blue"}}>{c}</h1></h2>
+                <button onClick={()=> {inc()}} style={{margin: "10px"}}>Increment </button>
+                <button onClick={()=> {dec()}} style={{margin: "10px"}}>Decrement </button>
+                <button onClick={()=> {sfn(0)}} style={{margin: "10px"}}>Reset </button>
+                </div>
+           ) 
+        }
+        ReactDOM.render(<div><Counter /> <Counter /></div>, document.getElementById("root"));
+    </script>
+</body>
+</html>

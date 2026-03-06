@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        function Jsx1(){
+            return (
+                <div style={{border: "2px solid red",margin: "10px", padding: "10px"}}>
+            <h1>Hello World</h1>
+            <p>This is a JSX example.</p>
+        </div>
+            )
+        }
+        var maindiv = <div>
+            {Jsx1()}
+            <Jsx1></Jsx1>
+            <Jsx1></Jsx1>
+        </div>
+        ReactDOM.render(maindiv, document.getElementById("root"));
+    </script>
+</body>
+</html>

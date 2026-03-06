@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        function Header() {
+            return (
+                <div style={{
+                    position: "fixed",
+                    top: "0",
+                    width: "100%",
+                    backgroundColor: "#4CAF50",
+                    color: "white",
+                    textAlign: "center",
+                    padding: "15px"
+                }}>
+                    <h2>Header Section</h2>
+                </div>
+            )
+        }
+        function Body() {
+            return (
+                <div style={{
+                    marginTop: "80px",
+                    marginBottom: "60px",
+                    textAlign: "center",
+                    padding: "20px"
+                }}>
+                    <p>This is the Body Content</p>
+                </div>
+            )
+        }
+        function Footer() {
+            return (
+                <div style={{
+                    position: "fixed",
+                    bottom: "0",
+                    width: "100%",
+                    backgroundColor: "#333",
+                    color: "white",
+                    textAlign: "center",
+                    padding: "10px"
+                }}>
+                    <h3>Footer Section</h3>
+                </div>
+            )
+        }
+        var maindiv = <div>
+            <Header />
+            <Body />
+            <Footer />
+        </div>
+        ReactDOM.render(maindiv, document.getElementById("root"));
+    </script>
+</body>
+
+</html>
